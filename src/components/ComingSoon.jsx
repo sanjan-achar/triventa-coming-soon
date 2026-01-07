@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/ComingSoon.css";
 
 export default function ComingSoon() {
   const launchDate = new Date("2026-03-01T00:00:00");
+  const contactRef = useRef(null);
 
   const calculateTimeLeft = () => {
     const diff = launchDate - new Date();
@@ -19,6 +20,7 @@ export default function ComingSoon() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [submitted, setSubmitted] = useState(false);
 
+  /* COUNTDOWN */
   useEffect(() => {
     const interval = setInterval(
       () => setTimeLeft(calculateTimeLeft()),
@@ -27,30 +29,34 @@ export default function ComingSoon() {
     return () => clearInterval(interval);
   }, []);
 
-  /* NAV ACTIVE ON SCROLL */
+  /* ✅ FINAL NAV LOGIC — SCROLL POSITION BASED */
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".nav-link");
+    const homeLink = document.querySelector('.nav-link[href="#home"]');
+    const contactLink = document.querySelector('.nav-link[href="#contact"]');
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove("active"));
-            const active = document.querySelector(
-              `.nav-link[href="#${entry.target.id}"]`
-            );
-            if (active) active.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
+    const onScroll = () => {
+      if (!contactRef.current) return;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      const scrollY = window.scrollY;
+      const contactOffset =
+        contactRef.current.offsetTop - window.innerHeight / 2;
+
+      if (scrollY >= contactOffset) {
+        homeLink.classList.remove("active");
+        contactLink.classList.add("active");
+      } else {
+        contactLink.classList.remove("active");
+        homeLink.classList.add("active");
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll(); // run once on load
+
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* FORM SUBMIT */
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -102,8 +108,8 @@ export default function ComingSoon() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact">
-          <h3 className="contact-heading">03. CONTACT US</h3>
+        <section id="contact" ref={contactRef}>
+          <h2 className="contact-heading">CONTACT US</h2>
 
           <form
             name="business-enquiry"
