@@ -15,6 +15,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;      /* ✅ CENTER HORIZONTALLY */
   justify-content: space-between;
   text-align: center;
   padding: 40px 20px;
@@ -32,8 +33,9 @@ body {
 }
 
 .content {
-  max-width: 900px;
-  margin: auto;
+  width: 100%;
+  max-width: 1100px;        /* Better for large screens */
+  margin: 0 auto;
 }
 
 .description {
@@ -148,5 +150,11 @@ body {
 @media (max-width: 480px) {
   .container {
     padding: 25px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    max-width: 100%;
   }
 }
