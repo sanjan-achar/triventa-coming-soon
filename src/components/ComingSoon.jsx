@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/ComingSoon.css";
 
 export default function ComingSoon() {
-  // ===== COUNTDOWN SETUP =====
+  // ===== COUNTDOWN =====
   const launchDate = new Date("2026-03-01T00:00:00");
 
   const calculateTimeLeft = () => {
@@ -28,7 +28,7 @@ export default function ComingSoon() {
     return () => clearInterval(interval);
   }, []);
 
-  // ===== FORM SUBMIT HANDLER =====
+  // ===== FORM SUBMIT =====
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,9 +43,7 @@ export default function ComingSoon() {
         setSubmitted(true);
         form.reset();
       })
-      .catch(() => {
-        alert("Submission failed. Please try again.");
-      });
+      .catch(() => alert("Submission failed. Please try again."));
   };
 
   return (
@@ -70,7 +68,7 @@ export default function ComingSoon() {
         </a>
       </nav>
 
-      {/* CENTER CONTENT */}
+      {/* CENTER */}
       <main className="center" id="home">
         <h1>TRIVENTA EXPORTS</h1>
         <h2>Your Gateway to Global Market</h2>
@@ -89,33 +87,43 @@ export default function ComingSoon() {
           </div>
         )}
 
-        {/* NETLIFY FORM */}
+        {/* BUSINESS ENQUIRY FORM */}
         <form
-          name="notify"
+          name="business-enquiry"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
           className="notify-form"
         >
-          {/* Required for Netlify */}
-          <input type="hidden" name="form-name" value="notify" />
+          <input type="hidden" name="form-name" value="business-enquiry" />
           <input type="hidden" name="bot-field" />
+
+          <textarea
+            name="message"
+            placeholder="Tell us what you're looking for (products, quantity, destination, etc.)"
+            required
+          />
 
           <input
             type="email"
             name="email"
-            placeholder="Your email"
-            required
+            placeholder="Your email address"
           />
 
-          <button type="submit">Notify Me</button>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Your phone / WhatsApp number"
+          />
 
-          {submitted && (
-            <p className="form-success">
-              Thanks! We’ll notify you soon.
-            </p>
-          )}
+          <button type="submit" disabled={submitted}>
+            {submitted ? "Requested" : "Request a Callback"}
+          </button>
+
+          <small className="privacy-note">
+            We respect your privacy. No spam.
+          </small>
         </form>
       </main>
 

@@ -195,3 +195,15 @@ body {
 .nav-link.active::before {
   height: 22px;
 }
+
+.notify-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.privacy-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
