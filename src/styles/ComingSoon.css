@@ -48,6 +48,46 @@ body {
   opacity: 0.7;
 }
 
+/* SIDE NAV EFFECTS */
+.nav-link {
+  position: relative;
+  display: block;
+  padding-left: 14px;
+  transition: all 0.25s ease;
+}
+
+/* Vertical indicator line */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  background: #9ccc65;
+  transform: translateY(-50%);
+  transition: height 0.25s ease;
+}
+
+.nav-link:hover {
+  opacity: 1;
+  color: #ffffff;
+  transform: translateX(6px);
+}
+
+.nav-link:hover::before {
+  height: 18px;
+}
+
+.nav-link.active {
+  opacity: 1;
+  color: #9ccc65;
+}
+
+.nav-link.active::before {
+  height: 22px;
+}
+
 /* CENTER CONTENT */
 .center {
   z-index: 2;
@@ -99,24 +139,80 @@ body {
   opacity: 0.7;
 }
 
-/* FORM */
+/* =========================
+   CLEAN ENQUIRY FORM
+   ========================= */
+
 .notify-form {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 14px;
+  margin: 36px auto 0;
+  max-width: 820px;
+}
+
+/* BIG MESSAGE FIELD */
+.notify-form textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* EMAIL + PHONE ROW */
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
 .notify-form input {
-  padding: 12px;
-  width: 260px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
 }
 
+/* PLACEHOLDERS */
+.notify-form textarea::placeholder,
+.notify-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* BUTTON */
 .notify-form button {
-  padding: 12px 20px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px;
   background: #558b2f;
-  color: white;
+  color: #ffffff;
   border: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.notify-form button:disabled {
+  background: #3e6520;
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* PRIVACY NOTE */
+.privacy-note {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 4px;
 }
 
 /* FOOTER */
@@ -144,66 +240,7 @@ body {
     flex-wrap: wrap;
   }
 
-  .notify-form {
-    flex-direction: column;
+  .contact-row {
+    grid-template-columns: 1fr;
   }
-
-  .notify-form input,
-  .notify-form button {
-    width: 100%;
-  }
-}
-
-/* SIDE NAV EFFECTS */
-.nav-link {
-  position: relative;
-  display: block;
-  padding-left: 14px;
-  transition: all 0.25s ease;
-}
-
-/* Vertical indicator line */
-.nav-link::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 2px;
-  height: 0;
-  background: #9ccc65;
-  transform: translateY(-50%);
-  transition: height 0.25s ease;
-}
-
-/* Hover effect */
-.nav-link:hover {
-  opacity: 1;
-  color: #ffffff;
-  transform: translateX(6px);
-}
-
-.nav-link:hover::before {
-  height: 18px;
-}
-
-/* Active state (HOME by default) */
-.nav-link.active {
-  opacity: 1;
-  color: #9ccc65;
-}
-
-.nav-link.active::before {
-  height: 22px;
-}
-
-.notify-form textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.privacy-note {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.75rem;
-  opacity: 0.7;
 }
