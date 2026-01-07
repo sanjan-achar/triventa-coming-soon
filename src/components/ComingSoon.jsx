@@ -1,47 +1,71 @@
+import { useEffect, useState } from "react";
 import "../styles/ComingSoon.css";
 
 export default function ComingSoon() {
+  const launchDate = new Date("2026-03-01T00:00:00");
+
+  const calculateTimeLeft = () => {
+    const diff = launchDate - new Date();
+    if (diff <= 0) return null;
+
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setTimeLeft(calculateTimeLeft()),
+      1000
+    );
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="container">
-      {/* HEADER */}
-      <header className="header">
-        <h1>Triventa Exports Pvt Ltd</h1>
-        <p className="tagline">Your Gateway to Global Market</p>
-      </header>
+    <div className="page">
+      {/* SIDE NAV */}
+      <nav className="side-nav">
+        <a href="#home" className="nav-link">
+          <span>00. </span>
+          <small>HOME</small>
+        </a>
+        <a href="#about" className="nav-link">
+          <span>01. </span>
+          <small>ABOUT</small>
+        </a>
+        <a href="#services" className="nav-link">
+          <span>02. </span>
+          <small>SERVICES</small>
+        </a>
+        <a href="#contact" className="nav-link">
+          <span>03. </span>
+          <small>CONTACT</small>
+        </a>
+      </nav>
 
-      {/* MAIN CONTENT */}
-      <section className="content">
-        <p className="description">
-          Triventa Exports Pvt Ltd is an India-based export company
-          specializing in supplying fresh agricultural produce
-          to international markets with strict quality standards
-          and reliable logistics.
-        </p>
+      {/* CENTER CONTENT */}
+      <main className="center">
+        <h1>TRIVENTA EXPORTS</h1>
+        <h2>Your Gateway to Global Market</h2>
 
-        {/* PRODUCTS */}
-        <div className="categories">
-          <span>🥬 Fresh Vegetables</span>
-          <span>🍎 Fresh Fruits</span>
-          <span>☕ Premium Coffee Beans</span>
-        </div>
+        <p className="status">UNDER CONSTRUCTION</p>
 
-        {/* TRUST SECTION */}
-        <div className="trust-section">
-          <div className="trust-card">
-            <h4>🌱 Farm Fresh Quality</h4>
-            <p>Sourced directly from trusted Indian farmers.</p>
+        {timeLeft && (
+          <div className="countdown">
+            {Object.entries(timeLeft).map(([label, value]) => (
+              <div className="time-box" key={label}>
+                <span className="number">{value}</span>
+                <span className="label">{label.toUpperCase()}</span>
+              </div>
+            ))}
           </div>
-          <div className="trust-card">
-            <h4>🚢 Export-Ready Logistics</h4>
-            <p>Packaging and compliance for global shipping.</p>
-          </div>
-          <div className="trust-card">
-            <h4>✅ Quality Assurance</h4>
-            <p>Strict quality checks at every stage.</p>
-          </div>
-        </div>
+        )}
 
-        {/* NETLIFY FORM */}
         <form
           name="launch-notify"
           method="POST"
@@ -49,37 +73,15 @@ export default function ComingSoon() {
           className="notify-form"
         >
           <input type="hidden" name="form-name" value="launch-notify" />
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email for updates"
-            required
-          />
+          <input type="email" name="email" placeholder="Your email" required />
           <button type="submit">Notify Me</button>
         </form>
-
-        {/* CONTACT */}
-        <div className="contact-box">
-          <a href="tel:+919148025018">📞 +91 91480 25018</a>
-          <a href="mailto:info@triventaexports.com">
-            📧 info@triventaexports.com
-          </a>
-          <a
-            href="https://www.linkedin.com/company/triventa-exports/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            🔗 LinkedIn: Triventa Exports
-          </a>
-        </div>
-
-        <p className="launch">🚀 Website launching soon</p>
-      </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Triventa Exports Pvt Ltd</p>
-        <p>Made in India 🇮🇳</p>
+        <p>+91 91480 25018 · info@triventaexports.com</p>
+        <p>© 2026 Triventa Exports Pvt Ltd · Made in India 🇮🇳</p>
       </footer>
     </div>
   );
