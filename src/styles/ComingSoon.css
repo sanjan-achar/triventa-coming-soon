@@ -9,21 +9,17 @@ body {
   overflow-x: hidden;
 }
 
-/* FULL SCREEN BACKGROUND */
+/* BACKGROUND */
 .page {
   min-height: 100vh;
   width: 100vw;
-
   background: url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000")
     center / cover no-repeat;
   position: relative;
   color: #ffffff;
-
-  /* 🔹 allow scrolling */
-  display: block;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 .page::before {
   content: "";
   position: absolute;
@@ -39,19 +35,15 @@ body {
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-
   display: flex;
   flex-direction: column;
   gap: 24px;
-
   font-size: 0.75rem;
   opacity: 0.7;
 }
 
-/* SIDE NAV EFFECTS */
 .nav-link {
   position: relative;
-  display: block;
   padding-left: 14px;
   transition: all 0.25s ease;
 }
@@ -68,37 +60,29 @@ body {
   transition: height 0.25s ease;
 }
 
-.nav-link:hover {
-  opacity: 1;
-  color: #ffffff;
+.nav-link:hover,
+.nav-link.active {
+  color: #9ccc65;
   transform: translateX(6px);
 }
 
-.nav-link:hover::before {
-  height: 18px;
-}
-
-.nav-link.active {
-  opacity: 1;
-  color: #9ccc65;
-}
-
+.nav-link:hover::before,
 .nav-link.active::before {
   height: 22px;
 }
 
-/* CENTER CONTENT */
+/* CENTER */
 .center {
   position: relative;
   z-index: 2;
-  text-align: center;
-
-  width: 100%;
   max-width: 1100px;
-
-  /* 🔹 top padding to center brand */
-  padding: 120px 40px 40px;
   margin: 0 auto;
+  padding: 120px 40px 40px;
+  text-align: center;
+}
+
+section {
+  margin-bottom: 100px;
 }
 
 .center h1 {
@@ -124,7 +108,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-bottom: 40px;
 }
 
 .time-box {
@@ -142,34 +125,33 @@ body {
   opacity: 0.7;
 }
 
-/* =========================
-   ENQUIRY FORM (REFINED)
-   ========================= */
+/* CONTACT */
+.contact-heading {
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  color: #9ccc65;
+  opacity: 0.85;
+}
 
+/* FORM */
 .notify-form {
+  max-width: 640px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 14px;
-
-  /* 🔹 reduced width */
-  max-width: 640px;
-  margin: 36px auto 0;
 }
 
-/* MESSAGE */
 .notify-form textarea {
-  width: 100%;
   min-height: 120px;
-  resize: none;
+  padding: 14px 16px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  padding: 14px 16px;
+  color: #fff;
   border-radius: 6px;
-  font-size: 0.9rem;
 }
 
-/* EMAIL + PHONE */
 .contact-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -177,56 +159,37 @@ body {
 }
 
 .notify-form input {
-  width: 100%;
+  padding: 12px 14px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  padding: 12px 14px;
+  color: #fff;
   border-radius: 6px;
-  font-size: 0.85rem;
 }
 
-/* PLACEHOLDERS */
-.notify-form textarea::placeholder,
-.notify-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* BUTTON */
 .notify-form button {
-  width: 100%;
-  margin-top: 6px;
   padding: 13px;
   background: #558b2f;
-  color: #ffffff;
+  color: #fff;
   border: none;
   font-weight: 600;
-  font-size: 0.9rem;
   border-radius: 6px;
 }
 
 .notify-form button:disabled {
   background: #3e6520;
-  opacity: 0.9;
-  cursor: default;
 }
 
-/* PRIVACY NOTE */
 .privacy-note {
   font-size: 0.7rem;
   opacity: 0.6;
-  text-align: center;
-  margin-top: 4px;
 }
 
-/* FOOTER — NOT FIXED */
+/* FOOTER */
 .footer {
-  position: relative;
   margin: 80px 0 30px;
   text-align: center;
   font-size: 0.75rem;
   opacity: 0.7;
-  z-index: 2;
 }
 
 /* MOBILE */
@@ -234,19 +197,9 @@ body {
   .side-nav {
     display: none;
   }
-
-  .center {
-    padding-top: 100px;
-  }
-
   .center h1 {
     font-size: 2.2rem;
   }
-
-  .countdown {
-    flex-wrap: wrap;
-  }
-
   .contact-row {
     grid-template-columns: 1fr;
   }
