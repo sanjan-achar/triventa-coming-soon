@@ -241,21 +241,21 @@ section {
 
   /* SHOW NAV AS TOP BAR */
   .side-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
 
-    flex-direction: row;
-    justify-content: center;
-    gap: 18px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 18px;
 
-    padding: 12px 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(6px);
+  padding: 14px 0;
+  background: #000000;   /* FULL SOLID */
+  opacity: 1;            /* ENSURE NO TRANSPARENCY */
 
-    z-index: 10;
+  z-index: 10;
   }
 
   .nav-link {
